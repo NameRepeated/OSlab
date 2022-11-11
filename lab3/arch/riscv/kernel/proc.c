@@ -133,7 +133,7 @@ void SJF_schedule()
             printk("Reset all counters!\n");
             for (int i = 1; i < NR_TASKS; i++) 
             {
-                task[i]->counter = rand()%(COUNTER_MAX-COUNTER_MIN+1)+COUNTER_MIN;
+                task[i]->counter = rand()%COUNTER_MAX+COUNTER_MIN;
                 printk("SET [PID = %d PRIORITY = %d COUNTER = %d]\n", task[i]->pid, task[i]->priority, task[i]->counter);
             }
         }
@@ -166,7 +166,7 @@ void Priority_schedule()
             printk("Reset all priority!\n");
             for (int i = 1; i < NR_TASKS; i++) 
             {
-                task[i]->counter = rand()%(COUNTER_MAX-COUNTER_MIN+1)+COUNTER_MIN;
+                task[i]->counter = rand()%COUNTER_MAX+COUNTER_MIN;
                 printk("SET [PID = %d PRIORITY = %d COUNTER = %d]\n", task[i]->pid, task[i]->priority, task[i]->counter);
             }
         }
