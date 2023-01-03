@@ -4,13 +4,13 @@
 _traps:
     # first check it's U-mode or S-mode before trap
     csrrw t0, sscratch, t0
-    beq t0, x0, _smode_trap_1  # sscratch == 0: S-mode, don't need to switch stack
+    beq t0, x0, _smode_trap_in  # sscratch == 0: S-mode, don't need to switch stack
     csrrw t0, sscratch, t0
     csrrw sp, sscratch, sp  # switch stack pointers for U mode and S mode
-    jal x0, _umode_trap_1
-_smode_trap_1:
+    jal x0, _umode_trap_in
+_smode_trap_in:
     csrrw t0, sscratch, t0
-_umode_trap_1:
+_umode_trap_in:
 
     # 1. save 31 registers and five CSRs to S-mode stack
     addi sp, sp, -288
@@ -109,15 +109,15 @@ __ret_from_fork:
     addi sp, sp, 288
 
     csrrw t0, sscratch, t0
-    beq t0, x0, _smode_trap_2  # sscratch == 0: S-mode, don't need to switch stack
+    beq t0, x0, _smode_trap_out  # sscratch == 0: S-mode, don't need to switch stack
     csrrw t0, sscratch, t0
     csrrw sp, sscratch, sp  # switch stack pointers for U mode and S mode
-    jal x0, _umode_trap_2
-_smode_trap_2:
+    jal x0, _umode_trap_out
+_smode_trap_out:
     csrrw t0, sscratch, t0
 
     # 4. return from trap
-_umode_trap_2:
+_umode_trap_out:
     sret
 
     .extern dummy

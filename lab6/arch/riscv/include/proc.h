@@ -22,13 +22,13 @@
 #define VM_ANONYM         0x0000000000000001
 
 struct vm_area_struct {
-    uint64_t vm_start;
-    uint64_t vm_end;
-    uint64_t vm_flags; // oring masks VM_?_MASK and VM_ANONYM
-    uint64_t file_offset_on_disk;
-    uint64_t vm_content_offset_in_file;
-    uint64_t vm_content_size_in_file;
-    char if_alloc; // whether this vm_area has part of memory allocated
+    uint64_t vm_start;      /* VMA 对应的用户态虚拟地址的开始   */
+    uint64_t vm_end;        /* VMA 对应的用户态虚拟地址的结束   */
+    uint64_t vm_flags;      /* VMA 对应的 flags */
+    uint64_t file_offset_on_disk;   //文件在磁盘中的偏移
+    uint64_t vm_content_offset_in_file;		//虚拟内存在文件上的偏移
+    uint64_t vm_content_size_in_file;		//文件大小
+    char if_alloc; // 是否已经分配空间
 };
 
 struct thread_struct {

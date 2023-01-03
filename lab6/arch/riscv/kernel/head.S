@@ -2,6 +2,7 @@
 .extern setup_vm
 .extern early_pgtbl
 .extern setup_vm_final
+.extern clock_set_next_event
 .extern mm_init
 .extern task_init
 .extern start_kernel
@@ -26,17 +27,7 @@ _start:
     csrw sie, t0
     
     # set first time interrupt
-    rdtime t0
-    li a0, 10000000
-    add a0, a0, t0
-    li a1, 0
-    li a2, 0
-    li a3, 0
-    li a4, 0
-    li a5, 0
-    li a6, 0
-    li a7, 0
-    call sbi_ecall
+    jal ra, clock_set_next_event
     # set sstatus[SIE] = 1
     # csrr t0, sstatus
     # ori t0, t0, 0x2

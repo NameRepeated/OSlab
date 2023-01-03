@@ -167,7 +167,7 @@ void schedule(void){
         for(int i = 1; i < NR_TASKS; i++){
             if (task[i] == NULL) continue;
             task[i]->counter = rand() % 10 + 1;
-            printk("[S] SET [PID = %d COUNTER = %d]\n", task[i]->pid, task[i]->counter);
+            //printk("[S] SET [PID = %d COUNTER = %d]\n", task[i]->pid, task[i]->counter);
         }
         schedule();
     }
@@ -201,7 +201,7 @@ void schedule(void){
         for(p = &task[NR_TASKS-1]; p > &task[0]; --p) {
             if (*p) {
                 (*p)->counter = ((*p)->counter >> 1) + (*p)->priority;
-                printk("SET [PID = %d PRIORITY = %d COUNTER = %d]\n", (*p)->pid, (*p)->priority, (*p)->counter);
+                //printk("SET [PID = %d PRIORITY = %d COUNTER = %d]\n", (*p)->pid, (*p)->priority, (*p)->counter);
             }
         }
 	}
